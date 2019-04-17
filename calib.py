@@ -40,24 +40,24 @@ else:
 
     fig1 = plt.figure()
     ax1 = fig1.add_subplot(111)
-    ax1.errorbar(t, A, dA, fmt='k.', label = 'Data')
+    ax1.errorbar(ch, t, dt, fmt='k.', label = 'Data')
     T = np.linspace(t.min(), t.max(), 500)
     ax1.plot(T, fitfunc(pf1, T), 'r-', label = 'Fit')
 
-    ax1.set_title('Radioactivity of Co-57 Source')
-    ax1.set_xlabel('Time, $t$ (days)')
-    ax1.set_ylabel('Activity, $A$ ($\\mu$C)')
+    ax1.set_title('Time Calibration')
+    ax1.set_xlabel('Channel')
+    ax1.set_ylabel('Time,$\\mu$s')
     ax1.legend()
 
-    textfit = '$A(t) = A_0e^{-t/\\tau}$ \n' \
-              '$A_0 = %.1f \pm %.1f$ $\\mu$C \n' \
-              '$\\tau = %.0f \pm %.0f$ days\n' \
+    textfit = '$T(ch) = ch * m + b $ \n' \
+              '$m = %.3f \pm %.3f$ $\\mu$s/ch \n' \
+              '$b = %.1f \pm %.1f$ $\\mu$s \n' \
               '$\chi^2= %.2f$ \n' \
               '$N = %i$ (dof) \n' \
               '$\chi^2/N = % .2f$' \
                % (pf1[0], pferr1[0], pf1[1], pferr1[1], chisq1, dof1,
                   chisq1/dof1)
-    ax1.text(0.6, .75, textfit, transform=ax1.transAxes, fontsize=12,
+    ax1.text(0.1, .75, textfit, transform=ax1.transAxes, fontsize=12,
              verticalalignment='top')
     ax1.set_xlim([-25, 575])
 
